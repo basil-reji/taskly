@@ -1,0 +1,8 @@
+name: A Simple Greeting
+on: [push]
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet the user
+        run: echo "Hello ${{ github.actor }}, Thank you for your contribution!"
