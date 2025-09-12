@@ -1,0 +1,86 @@
+$primary-color: #0070f3;
+$primary-bg: var(--foreground, #0070f3);
+$primary-text: var(--background, #fff);
+$border-radius: 6px;
+
+.todo-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+
+    .todo-form {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 24px;
+
+        .todo-input {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: $border-radius;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .primary {
+            background: $primary-bg;
+            color: $primary-text;
+            border: none;
+            border-radius: $border-radius;
+            padding: 0 16px;
+            height: 40px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    }
+
+    .todo-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+
+            &.checked .todo-text {
+                text-decoration: line-through;
+                color: #aaa;
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: pointer;
+                flex: 1;
+
+                input[type="checkbox"] {
+                    accent-color: $primary-color;
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .todo-text {
+                    font-size: 16px;
+                }
+            }
+
+            .secondary {
+                background: none;
+                border: none;
+                color: #888;
+                font-size: 20px;
+                cursor: pointer;
+                margin-left: 8px;
+
+                &:hover {
+                    color: #f33;
+                }
+            }
+        }
+    }
+}

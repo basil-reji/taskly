@@ -1,0 +1,183 @@
+// 🎨 Variables
+$gray-rgb-light: #000;
+$gray-rgb-dark: #fff;
+
+$gray-alpha-200-light: rgba($gray-rgb-light, 0.08);
+$gray-alpha-100-light: rgba($gray-rgb-light, 0.05);
+
+$gray-alpha-200-dark: rgba($gray-rgb-dark, 0.145);
+$gray-alpha-100-dark: rgba($gray-rgb-dark, 0.06);
+
+$button-primary-hover-light: #383838;
+$button-secondary-hover-light: #f2f2f2;
+
+$button-primary-hover-dark: #ccc;
+$button-secondary-hover-dark: #1a1a1a;
+
+// Fonts (fallback if needed)
+$font-sans: var(--font-geist-sans);
+$font-mono: var(--font-geist-mono);
+
+// ✅ Styles
+.page {
+  display: Flex;
+  align-items: center;
+  justify-items: center;
+  padding: 80px;
+  gap: 64px;
+  font-family: $font-sans;
+
+  @media (max-width: 600px) {
+    padding: 32px;
+    padding-bottom: 80px;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  ol {
+    font-family: $font-mono;
+    padding-left: 0;
+    margin: 0;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    list-style-position: inside;
+
+    @media (max-width: 600px) {
+      text-align: center;
+    }
+  }
+
+  li {
+    &:not(:last-of-type) {
+      margin-bottom: 8px;
+    }
+  }
+
+  code {
+    font-family: inherit;
+    background: $gray-alpha-100-light;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    align-items: center;
+  }
+}
+
+.ctas {
+  display: flex;
+  gap: 16px;
+
+  a {
+    appearance: none;
+    border-radius: 128px;
+    height: 48px;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+
+    &.primary {
+      background: var(--foreground);
+      color: var(--background);
+      gap: 8px;
+    }
+
+    &.secondary {
+      border-color: $gray-alpha-200-light;
+      min-width: 158px;
+
+      @media (max-width: 600px) {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 600px) {
+      font-size: 14px;
+      height: 40px;
+      padding: 0 16px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.footer {
+  grid-row-start: 3;
+  display: flex;
+  gap: 24px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    }
+  }
+
+  img {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// 🌙 Dark Mode overrides
+@media (prefers-color-scheme: dark) {
+  .main code {
+    background: $gray-alpha-100-dark;
+  }
+
+  .ctas a.secondary {
+    border-color: $gray-alpha-200-dark;
+  }
+
+  a.primary:hover {
+    background: $button-primary-hover-dark;
+  }
+
+  a.secondary:hover {
+    background: $button-secondary-hover-dark;
+  }
+
+  .logo {
+    filter: invert(1);
+  }
+}
+
+// 🖱️ Hover states (non-touch only)
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: $button-primary-hover-light;
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: $button-secondary-hover-light;
+    border-color: transparent;
+  }
+}
