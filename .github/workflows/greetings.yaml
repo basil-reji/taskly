@@ -1,0 +1,15 @@
+# Workflow Name
+name: Greetings
+
+# Trigger: Run this workflow on every push to the repository
+on: [push]
+
+jobs:
+  # Job Name
+  say-hello:
+    # Specify the runner environment
+    runs-on: ubuntu-latest
+    steps:
+      # Step: Print a greeting message to the GitHub Actions log
+      - name: Greet the user
+        run: echo "Hello ${{ github.actor }}, Thank you for your contribution!"
