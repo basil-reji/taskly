@@ -1,0 +1,27 @@
+# Workflow Name
+name: Test
+
+# Trigger: Run this workflow on every push and pull request
+on: [push, pull_request]
+
+jobs:
+  build:
+    # Specify the runner environment
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the repository code
+      - uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js version 20.x
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm test

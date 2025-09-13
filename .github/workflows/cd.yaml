@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      # Step 1: Check out the repository's code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Manually set up SSH
+      - name: Setup SSH
+        run: |
+          # Verify user identity
+          whoami
+
+          echo "Setting up SSH configuration..."
+          echo "${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }}"
+
+          # Create the .ssh directory and set permissions
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          
+          # Load the SSH private key from a GitHub Secret
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Add the server's public key to the known_hosts file to avoid interactive prompts
+          echo "${{ secrets.SSH_HOST_KEY }}" > ~/.ssh/known_hosts
+
+      # Step 4: Run deployment commands on the server
+      - name: Run deployment script
+        run: |
+          ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} "
+            export NVM_DIR=\"\$HOME/.nvm\"
+            [ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"
+            nvm use --lts
+            cd ~/taskly
+            npm install
+            npm run build
+            pm2 restart taskly
+          "
